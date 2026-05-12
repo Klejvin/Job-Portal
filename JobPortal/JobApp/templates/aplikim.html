@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Apliko tani {% endblock %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white p-4">
+                    <h3 class="mb-0"><i class="fas fa-paper-plane me-2"></i> Apliko për këtë Pozicion</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if user_cv %}
+                            <input type="hidden" name="phone" value="{{ user_cv.phone|default:'' }}">
+                            <input type="hidden" name="skills" value="{{ user_cv.skills|default:'' }}">
+                            <input type="hidden" name="experience" value="{{ user_cv.experience|default:'' }}">
+                            <input type="hidden" name="education" value="{{ user_cv.education|default:'' }}">
+                            <input type="hidden" name="projects" value="{{ user_cv.projects|default:'' }}">
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Emri</label>
+                                <input type="text" name="first_name" class="form-control" 
+                                       value="{% if user.is_authenticated %}{{ user.first_name }}{% endif %}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Mbiemri</label>
+                                <input type="text" name="last_name" class="form-control" 
+                                       value="{% if user.is_authenticated %}{{ user.last_name }}{% endif %}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <input type="email" name="email" class="form-control" 
+                                   value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Përshkrim i shkurtër (Mesazh)</label>
+                            <textarea name="description" class="form-control" rows="4" placeholder="Pse jeni ju kandidati i duhur?" required></textarea>
+                        </div>
+
+                        <hr>
+                        <h5 class="mb-3"><i class="fas fa-file-pdf me-2"></i> Dokumentacioni (CV)</h5>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-light text-center h-100">
+                                    <label class="form-label d-block fw-bold small text-uppercase">Ngarko CV nga PC</label>
+                                    <input type="file" name="cv_file" class="form-control form-control-sm">
+                                    <p class="text-muted small mt-2">Formatet: PDF, Docx</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-light text-center h-100 d-flex flex-column justify-content-center align-items-center">
+                                    {% if user.is_authenticated and user_cv %}
+                                        <label class="form-label d-block fw-bold small text-uppercase text-success">
+                                            <i class="fas fa-check-circle"></i> CV e Web-it u gjet
+                                        </label>
+                                        <p class="small text-muted text-center">Të dhënat e profilit do të bashkëngjiten automatikisht.</p>
+                                    {% else %}
+                                        <label class="form-label d-block fw-bold small text-uppercase text-primary">Nuk keni CV në Web?</label>
+                                        <a href="{% url 'cvPage' %}?job_id={{ job.id }}" class="btn btn-outline-primary btn-sm mt-auto">
+                                            <i class="fas fa-magic me-1"></i> Krijo Profilin e CV-së
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg shadow">Dërgo Aplikimin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

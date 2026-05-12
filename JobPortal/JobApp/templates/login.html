@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Identifikimi - JobPortal {% endblock %}
+
+{% block content %}
+<section class="login-section d-flex align-items-center py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-body p-5">
+                        
+                        <div class="text-center mb-4">
+                            <div class="login-icon-circle mx-auto mb-3">
+                                <i class="fas fa-user-lock fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="fw-bold text-dark">Mirësevini!</h3>
+                            <p class="text-muted small">Identifikohuni për të vazhduar</p>
+                        </div>
+
+                        <form method="POST" action="{% url 'loginPage' %}">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-muted">Emri i përdoruesit</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                                    <input type="text" name="username" class="form-control bg-light border-start-0 ps-0" placeholder="Shkruani username-in" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-muted">Fjalëkalimi</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="fas fa-key text-muted"></i></span>
+                                    <input type="password" name="password" class="form-control bg-light border-start-0 ps-0" placeholder="••••••••" required>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                 <a href="{% url 'password_reset' %}" class="small text-primary text-decoration-none fw-bold">Harruat fjalëkalimin?</a>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg py-2 fw-bold rounded-3 shadow-sm">
+                                    Hyr <i class="fas fa-sign-in-alt ms-2"></i>
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="small text-muted mb-0">Nuk keni llogari? 
+                                    <a href="{% url 'registerPage' %}" class="text-primary fw-bold text-decoration-none">Regjistrohu këtu</a>
+                                </p>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{% url 'homePage' %}" class="text-muted text-decoration-none small">
+                        <i class="fas fa-arrow-left me-1"></i> Kthehu në faqen kryesore
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

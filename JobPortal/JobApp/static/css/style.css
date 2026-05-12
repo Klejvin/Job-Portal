@@ -1,0 +1,1145 @@
+/* NAVBAR */
+ 
+        :root {
+            --jp-primary: #0d6efd; 
+            --jp-dark: #212529;
+        }
+
+        .navbar-jp {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .navbar-brand-jp {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--jp-dark);
+            letter-spacing: -1px;
+        }
+
+        .navbar-brand-jp span {
+            color: var(--jp-primary);
+        }
+
+        .nav-link-jp {
+            font-weight: 500;
+            color: #555;
+            margin-right: 10px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link-jp:hover, .nav-link-jp.active {
+            color: var(--jp-primary);
+        }
+
+       
+        .btn-login {
+            font-weight: 500;
+            color: var(--jp-primary);
+            border: 1px solid transparent;
+        }
+        .btn-login:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+            border-color: rgba(13, 110, 253, 0.1);
+        }
+
+        .btn-register {
+            font-weight: 500;
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #eee;
+        }
+        
+        .dropdown-toggle::after {
+            display: none; 
+        }
+
+
+/* Rregullon renditjen në Desktop dhe Mobile */
+@media (max-width: 991.98px) {
+    .navbar-jp .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Bën që profile trigger të duket si buton modern */
+    .user-trigger {
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
+    }
+    
+    .user-trigger:active {
+        transform: scale(0.95);
+        background-color: #e9ecef !important;
+    }
+}
+
+/* Hiq efektin gri të default të butonit hamburger në klikim */
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+
+/* FOOTER */
+.footer-jp {
+    background-color: #e7dfdf;
+    border-top: 1px solid #efe3e3;
+}
+
+.footer-links a {
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.footer-links a:hover {
+    color: var(--jp-primary);
+    padding-left: 8px; /* Lëvizje e lehtë djathtas */
+}
+
+.social-links a {
+    font-size: 1.2rem;
+    color: #adb5bd;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--jp-primary) ;
+    transform: translateY(-3px);
+    display: inline-block;
+}
+
+.footer-jp hr {
+    border-top: 1px solid #dee2e6;
+}
+
+
+
+
+/* --- Home Jobs Section Styling --- */
+
+/* --- Modern Grid Job Cards --- */
+
+.modern-job-card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-job-card:hover {
+    border-color: #0d6efd;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+}
+
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* Rrethi i Logos */
+.company-logo-circle {
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.company-logo-circle img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+}
+
+/* Stili për ikonën e portalit tënd */
+.portal-logo-icon {
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 110, 253, 0.05); /* Fond blu shumë i lehtë */
+    color: #0d6efd; /* Ngjyra primare e ikonës */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.salary-pill {
+    background: #eefdf5;
+    color: #10b981;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 10px;
+}
+
+.job-title-link a {
+    text-decoration: none;
+    color: #111827;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+
+.job-title-link a:hover {
+    color: #0d6efd;
+}
+
+.company-subname {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 5px 0 15px 0;
+}
+
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tag-item {
+    font-size: 0.75rem;
+    color: #6b7280;
+    background: #f9fafb;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-item i {
+    margin-right: 6px;
+    color: #0d6efd;
+    font-size: 0.8rem;
+}
+
+.job-excerpt {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Butoni në fund */
+.card-action {
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.btn-view-job {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #111827;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-view-job:hover {
+    background: #0d6efd;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+}
+
+.btn-view-job i {
+    margin-left: 8px;
+    font-size: 0.8rem;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .modern-job-card {
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+}
+
+/* CARUSEL */
+.carousel-item {
+    height: 70vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #2c3e50; 
+} 
+
+.hero_1 {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                      url('../images/home1.png'); 
+}
+
+.hero_2 {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                      url('../images/home2.png'); 
+}
+
+
+@media (max-width: 768px) {
+    #homeCarousel .carousel-item {
+        height: 60vh;
+        min-height: 350px;
+    }
+
+    #homeCarousel .carousel-caption {
+        bottom: 10%; 
+        text-align: center ; 
+        padding: 0 15px;
+    }
+
+    #homeCarousel .carousel-caption h1 {
+        font-size: 1.8rem; 
+        margin-bottom: 10px;
+    }
+
+    #homeCarousel .carousel-caption p {
+        font-size: 1rem; 
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    #homeCarousel .btn-lg {
+        padding: 10px 20px;
+        font-size: 0.9rem; 
+        width: 100%; 
+        margin-bottom: 10px;
+    }
+}
+
+
+.carousel-caption h1, .carousel-caption p, .carousel-caption .btn {
+    animation: fadeInUp 0.8s ease-in-out both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stilimi i statistikave */
+.stat-item {
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: scale(1.05);
+}
+
+.text-light-50 {
+    color: rgba(255, 255, 255, 0.8) ;
+}
+
+
+@media (max-width: 767px) {
+    .border-mobile-none {
+        border: none ;
+    }
+    .stat-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 2rem ;
+    }
+}
+
+
+/* Pyetje */
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    color: #0d6efd;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,0.125);
+}
+
+.accordion-item {
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.accordion-button::after {
+    background-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Partneret tane */
+/* Stilimi i kutisë që mban logon dhe emrin */
+.partner-card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 15px;
+    padding: 25px 15px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Siguron që të gjitha kutitë të jenë të barabarta */
+}
+
+/* Efekti kur kalon mausi mbi kartë */
+.partner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-color: #0d6efd; 
+}
+
+/* Hapësira e logos - NDRYSHIMI: Lartësi më e madhe dhe overflow hidden */
+.partner-logo {
+    height: 120px; /* E rritur që të nxjerrë mirë çdo lloj formati fotoje */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+/* Stilimi i fotos (Logoja) - NDRYSHIMI: width/height 100% dhe object-fit */
+.filter-grey {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Kjo i bën të gjitha fotot të rreshtohen perfekt pa u deformuar */
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+}
+
+/* Kur mausi kalon mbi KARTËN, logoja bëhet me ngjyra */
+.partner-card:hover .filter-grey {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Stilimi i Emrit të Kompanisë */
+.company-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    transition: color 0.3s ease;
+}
+
+.partner-card:hover .company-name {
+    color: #0d6efd;
+}
+
+/* Rregullimi i inputeve të formës */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+
+/* Stilimi i scrollbar-it për pjesën e djathtë */
+div[style*="overflow-y: auto"]::-webkit-scrollbar {
+    width: 6px;
+}
+
+div[style*="overflow-y: auto"]::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb {
+    background: #0d6efd;
+    border-radius: 10px;
+}
+
+div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb:hover {
+    background: #0b5ed7;
+}
+
+/* rreth nesh */
+
+
+/* Seksioni Hero (Kreu) */
+.about-hero {
+    max-width: 700px;
+}
+
+/* Seksioni i Historisë */
+.history-subtitle {
+    letter-spacing: 2px;
+}
+
+.history-title {
+    color: #333;
+}
+
+/* Kartat e Statistikave (500+, 10k+) */
+.stat-box {
+    border-left: 4px solid #0d6efd; /* Ngjyra primary e Bootstrap */
+}
+
+/* Badge "100% Shqip" mbi foto */
+.badge-overlay {
+    bottom: 0;
+    left: 0;
+    transform: translate(-30px, 30px);
+    background-color: #e7dfdf;
+}
+
+/* Rregullimi i Vizës poshtë titullit "Pse na besojnë ne?" */
+.title-divider {
+    width: 60px;
+    height: 3px;
+    opacity: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Rrethi i ikonave te kartat e besueshmërisë */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Ngjyrat e zbutura (Soft colors) për rrethin e ikonave */
+.bg-soft-primary { background-color: rgba(13, 110, 253, 0.1); }
+.bg-soft-success { background-color: rgba(25, 135, 84, 0.1); }
+.bg-soft-warning { background-color: rgba(255, 193, 7, 0.1); }
+
+/* Efekti hover për kartat "Pse na besojnë" */
+.about-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) ;
+}
+
+/* login */
+
+/* Sfondi i seksionit të Login-it */
+.login-section {
+    min-height: 80vh;
+    background-color: #f8f9fa; /* Një gri e lehtë që nxjerr në pah kartën e bardhë */
+}
+
+/* Rrethi i ikonës sipër formës */
+.login-icon-circle {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Stilimi i fushave Input (pasi i hoqëm border-in majtas për t'u bashkuar me ikonën) */
+.input-group-text {
+    border-color: #dee2e6;
+    color: #6c757d;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+    background-color: #fff ;
+}
+
+/* Butoni me efekt zmadhimi kur kalohet miu */
+.btn-primary {
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3) ;
+}
+
+
+/* register */
+/* Sfondi i Regjistrimit */
+.register-section {
+    min-height: 90vh;
+    background-color: #f8f9fa;
+}
+
+/* Rrethi i ikonës për regjistrim */
+.register-icon-circle {
+    width: 75px;
+    height: 75px;
+    background-color: rgba(25, 135, 84, 0.1); /* Ngjyra success e zbutur */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Stilimi i butonit success me hije */
+.btn-success {
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3) ;
+}
+
+/* Rregullimi i input-eve për mobile */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 2rem ;
+    }
+}
+
+
+
+
+/* njoftimet */
+/* Container-i që mban njoftimet lart djathtas */
+.msg-wrapper {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 10000;
+    width: 350px;
+    max-width: 90vw;
+}
+
+/* Stili i kartës së njoftimit */
+.custom-alert {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-left: 5px solid transparent;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alert-success { border-left-color: #28a745; }
+.alert-danger, .alert-error { border-left-color: #dc3545; }
+
+.alert-content { display: flex; align-items: center; }
+
+.alert-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; margin-right: 12px; flex-shrink: 0;
+}
+
+.btn-close-custom { background: none; border: none; color: #bbb; cursor: pointer; transition: 0.2s; }
+.btn-close-custom:hover { color: #333; }
+
+/* Shiriti i kohës që konsumohet */
+.progress-loader { 
+    position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; background: rgba(0,0,0,0.05); 
+}
+.progress-loader::before {
+    content: ""; position: absolute; height: 100%; width: 100%;
+    animation: load 3s linear forwards;
+}
+.alert-success .progress-loader::before { background: #28a745; }
+.alert-danger .progress-loader::before { background: #dc3545; }
+
+/* Animacionet */
+@keyframes slideInRight { 
+    from { transform: translateX(110%); opacity: 0; } 
+    to { transform: translateX(0); opacity: 1; } 
+}
+@keyframes load { 
+    from { width: 100%; } 
+    to { width: 0%; } 
+}
+
+
+/* cv */
+
+/* Stili i Përgjithshëm i Kartës së CV-së */
+.cv-card {
+    min-height: 1100px; /* E bën të ngjashme me gjatësinë e një flete A4 */
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+/* Kolona e Errët (Majtas) */
+.cv-sidebar {
+    background-color: #212529 ; /* Dark Grey/Black */
+    border-right: 5px solid #0d6efd; /* Linjë blu ndarëse */
+}
+
+.cv-sidebar label {
+    color: #0dcaf0; /* Ngjyrë Cyan për titujt e vegjël majtas */
+    letter-spacing: 1px;
+}
+
+.cv-sidebar .form-control {
+    border: 1px solid #495057;
+    transition: all 0.3s ease;
+}
+
+/* Kolona e Bardhë (Djathtas) */
+.cv-main-content {
+    background-color: #ffffff;
+}
+
+.cv-main-content h3 {
+    color: #212529;
+    border-left: 5px solid #0d6efd;
+    padding-left: 15px;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+}
+
+/* Fushat e Shkrimit (Textarea) */
+textarea.form-control {
+    resize: none; /* Ndalon zmadhimin manual që prish dizajnin */
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+textarea.form-control:focus {
+    background-color: #ffffff ;
+    border-color: #0d6efd ;
+    box-shadow: 0 0 0 0.25 red;
+     border-color: rgba(13, 110, 253, 0.25) ;
+}
+
+/* Placeholder-at */
+textarea::placeholder {
+    color: #adb5bd ;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Badge-et dhe Ikonat */
+.fa-2x {
+    width: 40px;
+    text-align: center;
+}
+
+/* Butoni Ruaj */
+.btn-primary.btn-lg {
+    padding: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: transform 0.2s;
+}
+
+.btn-primary.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+/* Përshtatja për Mobile */
+@media (max-width: 768px) {
+    .cv-card {
+        min-height: auto;
+    }
+    .cv-sidebar {
+        border-right: none;
+        border-bottom: 5px solid #0d6efd;
+    }
+}
+
+
+/* home/rregjistrohu tani */
+
+@media (max-width: 768px) {
+    
+    .custom-section {
+        padding-top: 2rem ;
+        padding-bottom: 2rem ;
+        margin-left: 15px ;
+        margin-right: 15px ;
+    }
+
+    /* Zvogëlojmë titullin */
+    .custom-section h3 {
+        font-size: 1.4rem ;
+        line-height: 1.2;
+    }
+
+    /* Zvogëlojmë tekstin përshkrues */
+    .custom-section p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem ;
+    }
+
+    /* Butoni bëhet më elegant dhe jo bllok gjigant */
+    .custom-btn {
+        padding: 10px 30px ;
+        font-size: 0.9rem ;
+        border-radius: 8px ;
+        width: auto ; /* Që të mos zërë gjithë gjerësinë nëse nuk dëshiron */
+    }
+}
+
+
+/* admimn */
+/* Stilimi i Inputeve që të jenë më elegante */
+#jobForm input, #jobForm select, #jobForm textarea {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    background-color: #f8fafc;
+}
+
+#jobForm input:focus, #jobForm textarea:focus {
+    background-color: #fff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+/* Zvogëlojmë Textarea e përshkrimit */
+#jobForm textarea {
+    min-height: 120px;
+}
+
+/* Rrotullon shigjetën kur hapet lista */
+.transition-icon {
+    transition: transform 0.3s ease;
+}
+
+#jobsToggleBtn[aria-expanded="true"] .transition-icon {
+    transform: rotate(180deg);
+}
+
+/* Stilimi i butonit kur është aktiv */
+#jobsToggleBtn:focus {
+    box-shadow: none;
+}
+
+
+
+/* --- RESPONSIVE / MOBILE \add job--- */
+@media (max-width: 768px) {
+    /* Header kompakt në mobile */
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start ;
+        gap: 15px;
+    }
+
+    #toggleFormBtn {
+        width: 100%;
+    }
+
+    /* Kthejmë formën në 1 kolonë të plotë */
+    .col-md-4, .col-md-8 {
+        width: 100%;
+    }
+    
+    /* Zvogëlojmë padding në mobile */
+    .card-body {
+        padding: 1.25rem ;
+    }
+}
+
+/* added jobs */
+@media (max-width: 767px) {
+    /* Kontejneri kryesor */
+    .table-responsive {
+        overflow-x: hidden;
+        border: none;
+        padding: 10px;
+    }
+
+    /* Fshehja e elementeve të tepërta */
+    .table-responsive thead {
+        display: none;
+    }
+
+    .table-responsive table, 
+    .table-responsive tbody, 
+    .table-responsive tr, 
+    .table-responsive td {
+        display: block;
+        width: 100%;
+    }
+
+    /* Karta e Pozicionit */
+    .table-responsive tbody tr {
+        margin-bottom: 20px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease;
+    }
+
+    /* Stili për emrin e pozicionit (Kolona 1) */
+    .table-responsive tbody td:nth-of-type(1) {
+        border: none;
+        padding: 0;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .table-responsive tbody td:nth-of-type(1) .fw-bold {
+        font-size: 1.15rem;
+        color: #1e293b;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .table-responsive tbody td:nth-of-type(1) .text-muted {
+        font-size: 0.85rem;
+        background: #f1f5f9;
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 6px;
+        color: #64748b !important;
+    }
+
+    /* Stili për Datën (Kolona 2) */
+    .table-responsive tbody td:nth-of-type(2) {
+        border-top: 1px dashed #e2e8f0;
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+
+    .table-responsive tbody td:nth-of-type(2)::before {
+        content: "Pozicioni:";
+        font-weight: 600;
+        font-size: 0.8rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+    }
+
+    /* Paneli i Veprimeve (Butonat) */
+    .table-responsive tbody td:nth-of-type(3) {
+        border: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    /* Grupi i butonave */
+    .table-responsive tbody td .btn-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Ndarja në dy kolona të barabarta */
+        gap: 10px;
+        width: 100%;
+        box-shadow: none !important;
+    }
+
+    /* Butonat individualë */
+    .table-responsive tbody td .btn {
+        border-radius: 12px !important;
+        padding: 12px !important;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-transform: none;
+    }
+
+    /* Butoni Edito */
+    .table-responsive tbody td .btn-info {
+        background: #eff6ff !important;
+        border: 1px solid #bfdbfe !important;
+        color: #2563eb !important;
+    }
+
+    /* Butoni Fshi */
+    .table-responsive tbody td .btn-danger {
+        background: #fef2f2 !important;
+        border: 1px solid #fecaca !important;
+        color: #dc2626 !important;
+    }
+
+    /* Ikona brenda butonave */
+    .table-responsive tbody td .btn i {
+        font-size: 1rem;
+    }
+
+    /* 1. Pastrimi i "hijeve" gri te karta kryesore */
+.card {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Rregullimi i Header-it që të mos lejojë ngjyrën gri të "rrjedhë" poshtë */
+.card-header {
+    background-color: #6c757d !important; /* Ngjyra secondary e saktë */
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* 3. Sigurohu që kontejneri i collapse të mos ketë background të vetin */
+#collapseJobList {
+    background-color: transparent !important;
+}
+
+/* 4. Fix për artefaktet vizuale gjatë scroll-it në mobile */
+.table-responsive {
+    background-color: #f8f9fa; /* Shto këtë që të jetë e njëjtë me sfondin e faqes */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 5. Heqja e border-it të fundit të tabelës që shfaqet si vijë gri */
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 15px !important; /* Krijon hapësirë të pastër mes kartave */
+    background-color: transparent !important;
+}
+}
+
+
+/* aplikimet e mia */
+/* --- Kontejneri dhe Struktura --- */
+.application-card {
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #f1f5f9;
+}
+
+.application-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+/* --- Ikonat dhe Sfondet e vogla --- */
+.bg-light.icon-box {
+    background-color: #f8fafc;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.text-primary.fa-lg {
+    color: #2563eb;
+}
+
+/* --- Status Badges (Pa important) --- */
+.bg-success-soft {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid rgba(22, 163, 74, 0.1);
+}
+
+.bg-primary {
+    background-color: #2563eb;
+}
+
+/* --- Butonat dhe Modals --- */
+.btn-outline-primary {
+    color: #2563eb;
+    border: 1px solid #2563eb;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.modal-content {
+    border: none;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* --- Tipografia dhe Detajet --- */
+.text-dark.fw-bold {
+    color: #1e293b;
+}
+
+.text-muted.small {
+    color: #64748b;
+}
+
+/* --- Përshtatja për Mobile (Responsive) --- */
+@media (max-width: 768px) {
+    .application-card .card-body {
+        padding: 1.25rem;
+    }
+    
+    .bg-light.icon-box {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .d-flex.align-items-center.justify-content-between.gap-3 {
+        width: 100%;
+        margin-top: 1rem;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 1rem;
+    }
+}
+
+
+
+
+/* details html */

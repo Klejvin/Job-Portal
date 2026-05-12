@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} CV Builder Profesional {% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg rounded-3 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-4 bg-dark text-white p-5">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-user-circle fa-7x mb-3 text-secondary"></i>
+                            <h4 class="fw-bold">{{ user.first_name }} {{ user.last_name }}</h4>
+                            <p class="text-info small">{{ user.email }}</p>
+                        </div>
+                        <hr class="bg-secondary">
+                        
+                        <form method="POST" action="?job_id={{ request.GET.job_id }}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-uppercase">Numri i Telefonit</label>
+                                <input type="text" name="phone" class="form-control form-control-sm bg-dark text-white border-secondary" 
+                                       placeholder="+355 6x xx xx xxx" value="{{ cv.phone|default:'' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-uppercase">Gjuhët e Huaja</label>
+                                <input type="text" name="languages" class="form-control form-control-sm bg-dark text-white border-secondary" 
+                                       placeholder="Anglisht, Italisht..." value="{{ cv.languages|default:'' }}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-uppercase">Aftësitë Teknike (Skills)</label>
+                                <textarea name="skills" class="form-control form-control-sm bg-dark text-white border-secondary" 
+                                          rows="6" placeholder="Python, Django, HTML, CSS...">{{ cv.skills|default:'' }}</textarea>
+                            </div>
+                    </div>
+
+                    <div class="col-md-8 p-5 bg-white">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-briefcase fa-2x text-primary me-3"></i>
+                            <h3 class="mb-0 fw-bold border-start border-primary border-5 ps-3">Eksperienca Profesionale</h3>
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="experience" class="form-control border-0 bg-light p-3" rows="5" 
+                                placeholder="Psh: Senior Web Developer - Kompania X (Janar 2022 - Sot)...">{{ cv.experience|default:'' }}</textarea>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4 mt-5">
+                            <i class="fas fa-graduation-cap fa-2x text-primary me-3"></i>
+                            <h3 class="mb-0 fw-bold border-start border-primary border-5 ps-3">Edukimi dhe Trajnimet</h3>
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="education" class="form-control border-0 bg-light p-3" rows="4" 
+                                placeholder="Psh: Master Shkencor në Inxhinieri Informatike...">{{ cv.education|default:'' }}</textarea>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4 mt-5">
+                            <i class="fas fa-project-diagram fa-2x text-primary me-3"></i>
+                            <h3 class="mb-0 fw-bold border-start border-primary border-5 ps-3">Projekte Personale</h3>
+                        </div>
+                        <div class="mb-4">
+                            <textarea name="projects" class="form-control border-0 bg-light p-3" rows="3" 
+                                placeholder="Psh: Ndërtimi i një Job Portal me Django...">{{ cv.projects|default:'' }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg shadow fw-bold">
+                                <i class="fas fa-save me-2"></i> Ruaj dhe Dërgo Aplikimin
+                            </button>
+                            <p class="text-center text-muted small mt-2">
+                                <i class="fas fa-info-circle"></i> Duke klikuar Ruaj, profili juaj përditësohet dhe aplikimi dërgohet automatikisht.
+                            </p>
+                        </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Partnerët tanë {% endblock %}
+
+{% block content %}
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold text-uppercase" style="letter-spacing: 2px;">Rrjeti Ynë</h6>
+            <h2 class="fw-bold">Partnerët që na besojnë</h2>
+        </div>
+
+        <div class="row align-items-stretch justify-content-center g-4">
+            {% for partner in partneret %}
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        {% if partner.logo %}
+                            <img src="{{ partner.logo.url }}" class="img-fluid filter-grey" alt="{{ partner.emri_kompanise }}">
+                        {% else %}
+                            <i class="bi bi-building text-muted display-4"></i>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="company-name text-center">
+                        {{ partner.emri_kompanise }}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted fst-italic">Së shpejti do të listohen partnerët tanë të rinj.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-5 p-4 rounded-4 text-center" style="background-color: #f8f9fa; border: 1px solid #e7dfdf;">
+            <p class="mb-0 fw-bold text-dark">
+                Dëshironi të bëheni partner i JobPortal? 
+                <a href="{% url 'behupartnerPage' %}" class="text-primary text-decoration-none ms-2">
+                    Na kontaktoni këtu <i class="bi bi-arrow-right"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

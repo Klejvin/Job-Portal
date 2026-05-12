@@ -1,0 +1,52 @@
+{% load static %}
+<footer class="footer-jp mt-5">
+    <div class="container py-5">
+        <div class="row g-4 text-center text-lg-start justify-content-center">
+            
+            <div class="col-lg-6 col-md-10">
+                <a class="navbar-brand navbar-brand-jp mb-3 d-block" href="{% url 'homePage' %}">
+                    <i class="fas fa-briefcase me-2 text-primary"></i>JOB<span>PORTAL</span>
+                </a>
+                <p class="text-muted mb-4 mx-auto mx-lg-0" style="max-width: 400px;">
+                    Platforma juaj e besuar për gjetjen e mundësive të reja të karrierës. Ne lidhim talentet me kompanitë më të mira në treg.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-4">Navigimi</h6>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="{% url 'homePage' %}" class="text-decoration-none d-block mb-2">Home</a></li>
+                    <li><a href="{% url 'aboutPage' %}" class="text-decoration-none d-block mb-2">Rreth Nesh</a></li>
+                    <li><a href="{% url 'punePage' %}" class="text-decoration-none d-block mb-2">Punët</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <h6 class="fw-bold mb-4">Mbështetja</h6>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="{% url 'pyetjePage' %}" class="text-decoration-none d-block mb-2">Pyetje të Shpeshta</a></li>
+                    <li><a href="{% url 'partneretPage' %}" class="text-decoration-none d-block mb-2">Partnerët tanë</a></li>
+                    <li><a href="#" class="text-decoration-none d-block mb-2">Email:klejvinlalaj18@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="my-5 opacity-25">
+
+        <div class="text-center">
+            <span class="text-muted small">
+                &copy; <span id="year"></span> JobPortal. Të gjitha të drejtat të rezervuara.
+            </span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>

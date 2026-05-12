@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+<div id="homeCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active hero_1" >
+            <div class="container h-100">
+                <div class="carousel-caption text-start h-100 d-flex flex-column justify-content-center">
+                    <h1 class="display-4 fw-bold">Gjej Punën e Ëndrrave</h1>
+                    <p class="lead text-light">Mijëra mundësi punësimi në teknologji, ekonomi dhe art në një vend të vetëm.</p>
+                    <div class="mt-4">
+                        <a class="btn btn-primary btn-lg px-4 me-2" href="{% url 'punePage' %}">Shiko Punët</a>
+                        <a class="btn btn-outline-light btn-lg px-4" href="{% url 'aboutPage' %}">Mëso më shumë</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item hero_2" >
+            <div class="container h-100">
+                <div class="carousel-caption h-100 d-flex flex-column justify-content-center">
+                    <h1 class="display-4 fw-bold">Ndërto Karrierën Tënde</h1>
+                    <p class="lead text-light">Lidhu me kompanitë më të mira në vend dhe ndërto të ardhmen që meriton.</p>
+                    <div class="mt-4">
+                        <a class="btn btn-light btn-lg px-4" href="{% url 'registerPage' %}">Krijo Profilin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<section class="py-5 bg-primary text-white shadow-lg my-5">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="stat-item p-3">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-briefcase fa-3x opacity-75"></i>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-0 counter" data-target="1250">1,250+</h2>
+                    <p class="text-light-50 fs-5">Pozicione Pune Aktive</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-item p-3 border-start border-end border-light border-opacity-25 border-mobile-none">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-building fa-3x opacity-75"></i>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-0 counter" data-target="450">450+</h2>
+                    <p class="text-light-50 fs-5">Kompanitë Partnerë</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-item p-3">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-users fa-3x opacity-75"></i>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-0 counter" data-target="8000">8,000+</h2>
+                    <p class="text-light-50 fs-5">Kandidatë të Punësuar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% if not user.is_authenticated %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Si të gjesh punë në 3 hapa?</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="step-icon mb-3">
+                    <span class="badge rounded-pill bg-primary fs-4 p-3">1</span>
+                </div>
+                <h4>Krijo Llogarinë</h4>
+                <p class="text-muted">Regjistrohu dhe plotëso profilin tënd profesional brenda pak minutash.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-icon mb-3">
+                    <span class="badge rounded-pill bg-primary fs-4 p-3">2</span>
+                </div>
+                <h4>Kërko Pozicionin</h4>
+                <p class="text-muted">Përdor filtrat tanë për të gjetur punën që përshtatet me aftësitë e tua.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-icon mb-3">
+                    <span class="badge rounded-pill bg-primary fs-4 p-3">3</span>
+                </div>
+                <h4>Apliko me një klik</h4>
+                <p class="text-muted">Dërgo CV-në tënde direkt te punëdhënësi dhe prit ftesën për intervistë.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="home-jobs-grid py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center fw-bold mb-5">Punët e Fundit</h2>
+        <div class="row g-4">
+            {% for job in latest_jobs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="modern-job-card">
+                        <div class="card-header-flex">
+                            <div class="company-logo-circle">
+                                {% if job.company_logo %}
+                                    <img src="{{ job.company_logo.url }}" alt="{{ job.company }}">
+                                {% else %}
+                                    <div class="portal-logo-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <span class="salary-pill">{{ job.company }}</span>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="job-title-link">
+                                <a href="{% url 'detailsPage' job.pk %}">{{ job.title }}</a>
+                            </h5>
+                            <p class="company-subname text-muted">{{ job.company }}</p>
+                            
+                            <div class="job-tags">
+                                <span class="tag-item"><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+                                <span class="tag-item"><i class="far fa-clock"></i> {{ job.conditions }}</span>
+                            </div>
+                            
+                            <p class="job-excerpt">
+                                {{ job.description|truncatechars:90 }}
+                            </p>
+                        </div>
+
+                        <div class="card-action">
+                            <a href="{% url 'detailsPage' job.pk %}" class="btn-view-job">
+                                Shiko Pozicionin <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Për momentin nuk ka punë të reja.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% if not user.is_authenticated %}
+<section class="custom-section py-5 bg-dark text-white rounded-4 mx-3 my-5 shadow-lg">
+    <div class="container">
+        <div class="row align-items-center justify-content-between px-lg-4">
+            <div class="col-lg-7 mb-4 mb-lg-0 text-center text-lg-start">
+                <h3 class="fw-bold mb-2">Mos humb asnjë mundësi!</h3>
+                <p class="mb-0 text-white-50">Regjistrohu që të marrësh njoftimet e fundit direkt në email.</p>
+            </div>
+            
+            <div class="col-lg-auto text-center text-lg-end">
+                <a href="{% url 'registerPage' %}" class="btn btn-primary custom-btn fw-bold">
+                    Regjistrohu Tani
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<script>
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        counter.innerText = '0';
+        const updateCounter = () => {
+            const target = +counter.getAttribute('data-target');
+            const c = +counter.innerText;
+            const increment = target / 200;
+            if (c < target) {
+                counter.innerText = `${Math.ceil(c + increment)}`;
+                setTimeout(updateCounter, 1);
+            } else {
+                counter.innerText = target + '+';
+            }
+        };
+        updateCounter();
+    });
+</script>
+{% endblock %}

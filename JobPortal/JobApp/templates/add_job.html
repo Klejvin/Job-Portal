@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {% if edit_mode %} Edito Punën {% else %} Menaxho Punët {% endif %} {% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            
+            <!-- Mesazhet Alert -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+                        <i class="fas fa-check-circle me-2"></i> {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if not edit_mode %}
+            <!-- Header i Panelit -->
+            <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border-start border-primary border-4">
+                <div>
+                    <h4 class="fw-bold mb-0 text-dark">Paneli i Partnerit</h4>
+                    <p class="text-muted mb-0 x-small text-uppercase mt-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Menaxho njoftimet dhe aplikimet</p>
+                </div>
+                <button class="btn btn-primary btn-md shadow-sm rounded-pill px-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJobForm" id="toggleFormBtn">
+                    <i class="fas fa-plus-circle me-2"></i> Publiko Punë
+                </button>
+            </div>
+            {% endif %}
+
+            <!-- FORMA E PUBLIKIMIT / EDITIMIT -->
+            <div class="collapse {% if edit_mode %}show{% endif %} mb-4" id="collapseJobForm">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-dark py-3 px-4">
+                        <h5 class="mb-0 text-white fw-bold">
+                            <i class="fas {% if edit_mode %}fa-edit{% else %}fa-briefcase{% endif %} me-2 text-warning"></i>
+                            {% if edit_mode %} Modifiko Njoftimin {% else %} Detajet e Pozicionit {% endif %}
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" id="jobForm">
+                            {% csrf_token %}
+                            <div class="row g-3"> 
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold small text-secondary">Titulli i Pozicionit</label>
+                                    {{ form.title }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold small text-secondary">Kompania</label>
+                                    {{ form.company }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small text-secondary">Kategoria</label>
+                                    {{ form.category }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small text-secondary">Qyteti</label>
+                                    {{ form.location }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold small text-secondary">Paga</label>
+                                    {{ form.salary }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold small text-secondary">Orari & Kushtet</label>
+                                    {{ form.conditions }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold small text-secondary">Linku i Lokacionit</label>
+                                    {{ form.location_link }}
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold small text-secondary">Përshkrimi i Detajuar</label>
+                                    {{ form.description }}
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-4">
+                                <button type="submit" class="btn {% if edit_mode %}btn-warning{% else %}btn-success{% endif %} px-5 fw-bold shadow-sm">
+                                    {% if edit_mode %} Ruaj Ndryshimet {% else %} Publiko Tani {% endif %}
+                                </button>
+                                {% if edit_mode %}
+                                    <a href="{% url 'add_job_custom' %}" class="btn btn-light border px-4">Anulo</a>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% if not edit_mode %}
+            <!-- TABELA E NJOFTIMEVE -->
+            <div class="card shadow-lg border-0 mt-4 overflow-hidden">
+                <div class="card-header bg-secondary p-0 border-0">
+                    <button class="btn btn-secondary w-100 p-3 d-flex align-items-center justify-content-between shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJobList">
+                        <h5 class="mb-0 fw-bold text-white"><i class="fas fa-list-ul me-2 text-warning"></i> Njoftimet e Tua Aktive</h5>
+                        <i class="fas fa-chevron-down text-white"></i>
+                    </button>
+                </div>
+                <div class="collapse show" id="collapseJobList">
+                    <div class="table-responsive p-0">
+                        <table class="table table-hover mb-0 align-middle text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4 text-start">Pozicioni</th>
+                                    <th>Qyteti</th>
+                                    <th>Veprimet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for job in jobs %}
+                                <tr>
+                                    <td class="ps-4 text-start">
+                                        <span class="fw-bold text-dark">{{ job.title }}</span>
+                                        <div class="small text-primary">{{ job.get_category_display }}</div>
+                                    </td>
+                                    <td><span class="badge bg-light text-dark border">{{ job.location }}</span></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{% url 'edit_job' job.pk %}" class="btn btn-sm btn-info text-white"><i class="fas fa-edit"></i></a>
+                                            <a href="{% url 'delete_job' job.pk %}" class="btn btn-sm btn-danger text-white"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr><td colspan="3" class="py-4">Nuk keni njoftime aktive.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABELA E APLIKIMEVE ME TE GJITHA FUSHAT -->
+            <div class="card shadow-lg border-0 mt-5">
+                <div class="card-header bg-dark text-white p-3">
+                    <h5 class="mb-0"><i class="fas fa-users me-2 text-info"></i> Aplikimet e Fundit</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Kandidati</th>
+                                <th>Pozicioni</th>
+                                <th>Kontakt</th>
+                                <th class="text-center">CV & Profili</th>
+                                <th class="text-end pe-4">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                                {% for aplikim in job.applications.all %}
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm me-3 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">
+                                                {{ aplikim.first_name|slice:":1" }}{{ aplikim.last_name|slice:":1" }}
+                                            </div>
+                                            <div>
+                                                <span class="fw-bold d-block">{{ aplikim.first_name }} {{ aplikim.last_name }}</span>
+                                                <small class="text-muted">Aplikant</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-light text-dark border">{{ job.title }}</span></td>
+                                    <td class="small">
+                                        <i class="fas fa-envelope text-muted me-1"></i> {{ aplikim.email }}<br>
+                                        <i class="fas fa-phone text-muted me-1"></i> {{ aplikim.phone|default:"-" }}
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal{{ aplikim.id }}">
+                                            <i class="fas fa-eye me-1"></i> Shiko Profilin
+                                        </button>
+
+                                        <!-- MODAL I DETAJUAR -->
+                                        <div class="modal fade" id="modal{{ aplikim.id }}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                                <div class="modal-content border-0 shadow-lg">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title fw-bold"><i class="fas fa-user-tie me-2"></i> Profili i Kandidatit</h5>
+                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body p-4">
+                                                        <div class="row g-4 text-start">
+                                                            <!-- Kolona Majtas: Te dhena Personale -->
+                                                            <div class="col-md-4 border-end">
+                                                                <h6 class="fw-bold text-primary mb-3">Informacion Kontakti</h6>
+                                                                <p class="mb-1 text-muted small text-uppercase">Emri i Plotë</p>
+                                                                <p class="fw-bold mb-3">{{ aplikim.first_name }} {{ aplikim.last_name }}</p>
+                                                                
+                                                                <p class="mb-1 text-muted small text-uppercase">Email</p>
+                                                                <p class="fw-bold mb-3">{{ aplikim.email }}</p>
+                                                                
+                                                                <p class="mb-1 text-muted small text-uppercase">Telefon</p>
+                                                                <p class="fw-bold mb-3">{{ aplikim.phone|default:"I paplotësuar" }}</p>
+                                                                
+                                                                <hr>
+                                                                {% if aplikim.cv_file %}
+                                                                    <a href="{{ aplikim.cv_file.url }}" target="_blank" class="btn btn-dark w-100 mb-2">
+                                                                        <i class="fas fa-file-download me-2"></i> Shkarko CV (Doc)
+                                                                    </a>
+                                                                {% endif %}
+                                                            </div>
+
+                                                            <!-- Kolona Djathtas: Eksperienca dhe Aftesite -->
+                                                            <div class="col-md-8">
+                                                                <div class="mb-4">
+                                                                    <h6 class="fw-bold text-primary border-bottom pb-2"><i class="fas fa-lightbulb me-2 text-warning"></i>Aftësitë</h6>
+                                                                    <p class="text-dark bg-light p-2 rounded">{{ aplikim.skills|default:"Nuk ka të dhëna." }}</p>
+                                                                </div>
+
+                                                                <div class="mb-4">
+                                                                    <h6 class="fw-bold text-primary border-bottom pb-2"><i class="fas fa-briefcase me-2 text-secondary"></i>Eksperienca Pune</h6>
+                                                                    <p class="text-dark">{{ aplikim.experience|linebreaks|default:"Nuk ka të dhëna." }}</p>
+                                                                </div>
+
+                                                                <div class="mb-4">
+                                                                    <h6 class="fw-bold text-primary border-bottom pb-2"><i class="fas fa-university me-2 text-info"></i>Edukimi</h6>
+                                                                    <p class="text-dark">{{ aplikim.education|linebreaks|default:"Nuk ka të dhëna." }}</p>
+                                                                </div>
+
+                                                                <div class="mb-4">
+                                                                    <h6 class="fw-bold text-primary border-bottom pb-2"><i class="fas fa-project-diagram me-2 text-success"></i>Projekte</h6>
+                                                                    <p class="text-dark">{{ aplikim.projects|linebreaks|default:"Nuk ka të dhëna." }}</p>
+                                                                </div>
+
+                                                                <div class="mt-4 p-3 bg-warning bg-opacity-10 rounded border-start border-warning border-4">
+                                                                    <h6 class="fw-bold">Pse duhet të më përzgjidhni?</h6>
+                                                                    <p class="mb-0 italic small">{{ aplikim.description }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-end pe-4 small text-muted">{{ aplikim.created_at|date:"d M" }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% empty %}
+                                <tr><td colspan="5" class="text-center py-5">Asnjë aplikim i ri deri tani.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Logjika e butonit te publikimit
+    const toggleBtn = document.getElementById('toggleFormBtn');
+    const collapseForm = document.getElementById('collapseJobForm');
+
+    if (toggleBtn) {
+        collapseForm.addEventListener('shown.bs.collapse', function () {
+            toggleBtn.innerHTML = '<i class="fas fa-times-circle me-2"></i> Anulo Publikimin';
+            toggleBtn.classList.replace('btn-primary', 'btn-outline-danger');
+        });
+        collapseForm.addEventListener('hidden.bs.collapse', function () {
+            toggleBtn.innerHTML = '<i class="fas fa-plus-circle me-2"></i> Publiko Punë';
+            toggleBtn.classList.replace('btn-outline-danger', 'btn-primary');
+        });
+    }
+
+    // Auto-mbyllja e alerteve
+    document.addEventListener("DOMContentLoaded", function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            setTimeout(function() {
+                alert.style.transition = "opacity 0.6s ease";
+                alert.style.opacity = "0";
+                setTimeout(function() { alert.remove(); }, 600);
+            }, 3000); 
+        });
+    });
+</script>
+{% endblock %}

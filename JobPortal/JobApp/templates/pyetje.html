@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Pyetje te shpeshta {% endblock %}
+
+{% block content %}
+
+
+
+  <section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 100px;">
+                    <h6 class="text-primary fw-bold text-uppercase">Mbështetja</h6>
+                    <h2 class="fw-bold mb-4">Pyetje të Shpeshta</h2>
+                    <p class="text-muted mb-4">
+                        Keni një pyetje tjetër që nuk ndodhet këtu? Na kontaktoni direkt dhe ekipi ynë do t'ju përgjigjet brenda 24 orëve.
+                    </p>
+                    <a href="mailto:klejvinlalaj18@gmail.com" class="btn btn-primary px-4 py-2 rounded-pill">Na Kontaktoni</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden" id="faqJobPortal">
+                    
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                                <i class="fas fa-question-circle me-3 text-primary"></i> A është shërbimi falas për kandidatët?
+                            </button>
+                        </h2>
+                        <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqJobPortal">
+                            <div class="accordion-body py-4 text-muted">
+                                Po, JobPortal është 100% falas për të gjithë punëkërkuesit. Ju mund të kërkoni, filtroni dhe aplikoni për çdo pozicion pa asnjë kosto të fshehur.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                                <i class="fas fa-user-check me-3 text-primary"></i> A duhet të krijoj një llogari për të aplikuar?
+                            </button>
+                        </h2>
+                        <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqJobPortal">
+                            <div class="accordion-body py-4 text-muted">
+                                Ju mund të shikoni punët pa llogari, por ju sugjerojmë të regjistroheni. Me një llogari, ju mund të ruani punët tuaja të preferuara (Wishlist) dhe të ndiqni statusin e aplikimeve tuaja në kohë reale.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                                <i class="fas fa-file-upload me-3 text-primary"></i> Si mund ta ngarkoj CV-në time?
+                            </button>
+                        </h2>
+                        <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqJobPortal">
+                            <div class="accordion-body py-4 text-muted">
+                                CV-ja mund të ngarkohet në profilin tuaj në format PDF ose Word. Kur aplikoni për një punë, sistemi do t'ju pyesë automatikisht nëse dëshironi të përdorni CV-në e profilit apo të ngarkoni një të re.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                                <i class="fas fa-building me-3 text-primary"></i> Jam një kompani, si mund të postoj njoftime?
+                            </button>
+                        </h2>
+                        <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqJobPortal">
+                            <div class="accordion-body py-4 text-muted">
+                                Kompanitë duhet të regjistrohen si "Business". Pasi të verifikohet llogaria, ju mund të postoni njoftime pafund dhe të keni akses në dashboard-in tonë të menaxhimit të kandidatëve.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold py-4" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                                <i class="fas fa-shield-alt me-3 text-primary"></i> A janë të sigurta të dhënat e mia?
+                            </button>
+                        </h2>
+                        <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqJobPortal">
+                            <div class="accordion-body py-4 text-muted">
+                                Siguria është prioriteti ynë. Të dhënat tuaja enkriptohen dhe nuk ndahen kurrë me palë të treta pa lejen tuaj. Vetëm kompania ku ju aplikoni mund të shohë detajet tuaja profesionale.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

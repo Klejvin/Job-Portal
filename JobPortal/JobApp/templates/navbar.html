@@ -1,0 +1,152 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-jp sticky-top bg-white shadow-sm">
+    <div class="container">
+        
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'homePage' %}">
+            <i class="fas fa-briefcase me-2 text-primary"></i>
+            <span class="fw-bold text-dark">JOB</span><span class="text-primary fw-bold">PORTAL</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+            
+            {% if user.is_authenticated %}
+                <div class="user-trigger d-flex align-items-center bg-light px-2 py-1 rounded-pill border" 
+                     role="button" 
+                     data-bs-toggle="offcanvas" 
+                     data-bs-target="#sidebarProfile" 
+                     style="cursor: pointer; transition: all 0.2s ease;">
+                    
+                    <div class="avatar-circle bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" 
+                         style="width: 32px; height: 32px;">
+                        <i class="fas fa-user small"></i>
+                    </div>
+                    
+                    <span class="fw-bold text-dark ms-2" style="font-size: 0.9rem;">
+                        {{ user.username }}
+                    </span>
+                    <i class="fas fa-chevron-down small ms-1 opacity-50 d-none d-md-inline-block"></i>
+                </div>
+            {% else %}
+                <div class="d-none d-lg-flex gap-2">
+                    <a href="{% url 'loginPage' %}" class="btn btn-login text-primary fw-bold">Log In</a>
+                    <a href="{% url 'registerPage' %}" class="btn btn-primary px-4 rounded-pill">Register</a>
+                </div>
+            {% endif %}
+
+            <button class="navbar-toggler border-0 ms-1 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="width: 1.2em; height: 1.2em;"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'homePage' %}active{% endif %}" href="{% url 'homePage' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'punePage' %}active{% endif %}" href="{% url 'punePage' %}">Kërko Punë</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'aboutPage' %}active{% endif %}" href="{% url 'aboutPage' %}">Rreth nesh</a>
+                </li>
+
+                {% if not user.is_authenticated %}
+                <li class="nav-item d-lg-none mt-3">
+                    <a href="{% url 'loginPage' %}" class="btn btn-outline-primary w-100 mb-2">Log In</a>
+                    <a href="{% url 'registerPage' %}" class="btn btn-primary w-100">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+</nav>
+{% if user.is_authenticated %}
+<div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="sidebarProfile">
+    <div class="offcanvas-header border-bottom bg-light">
+        <h5 class="offcanvas-title fw-bold">Menaxho Llogarinë</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    
+    <div class="offcanvas-body d-flex flex-column">
+        <div class="text-center py-4">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow" style="width: 70px; height: 70px;">
+                <i class="fas fa-user fa-2x"></i>
+            </div>
+            <h5 class="fw-bold mb-0 text-dark">{{ user.username }}</h5>
+            <p class="text-muted small">{{ user.email }}</p>
+        </div>
+        
+        <hr class="opacity-25">
+        
+        <div class="list-group list-group-flush flex-grow-1">
+            
+            {% if not user.is_staff %}
+                <a href="{% url 'my_applicationsPage' %}" class="list-group-item list-group-item-action border-0 py-3 rounded-3 mb-1">
+                    <i class="fas fa-id-badge me-3 text-primary"></i> Aplikimet e mia
+                </a>
+            {% endif %}
+            
+            {% if user.is_staff %}
+                <div class="bg-light p-2 rounded-3 mt-3 shadow-sm border">
+                    {% if user.is_superuser %}
+                        <a href="/admin/" class="list-group-item list-group-item-action border-0 py-3 rounded-3 text-primary fw-bold bg-white">
+                            <i class="fas fa-tools me-3"></i>Django Admin (Full)
+                        </a>
+                    {% else %}
+                        <a href="{% url 'add_job_custom' %}" class="list-group-item list-group-item-action border-0 py-3 rounded-3 text-danger fw-bold bg-white">
+                            <i class="fas fa-user-shield me-3"></i>Admin Panel
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="mt-auto border-top pt-3">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger w-100 py-2 fw-bold rounded-pill">
+                    <i class="fas fa-sign-out-alt me-2"></i>Dil nga llogaria
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div id="msg-container" class="msg-wrapper">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="custom-alert alert-{{ message.tags }} shadow-lg" role="alert">
+                <div class="alert-content">
+                    <div class="alert-icon {% if message.tags == 'success' %}bg-success{% else %}bg-danger{% endif %}">
+                        <i class="fas {% if message.tags == 'success' %}fa-check{% else %}fa-exclamation{% endif %}"></i>
+                    </div>
+                    <div class="alert-body">
+                        <strong class="d-block text-dark">{% if message.tags == 'success' %}Sukses!{% else %}Gabim!{% endif %}</strong>
+                        <span class="text-muted small">{{ message }}</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-custom ms-3" onclick="this.parentElement.remove();">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="progress-loader"></div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.custom-alert');
+        alerts.forEach(function(alert) {
+            setTimeout(function() {
+                alert.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                alert.style.opacity = "0";
+                alert.style.transform = "translateX(20px)";
+                setTimeout(function() { alert.remove(); }, 500);
+            }, 3000); // 3 sekonda
+        });
+    });
+</script>

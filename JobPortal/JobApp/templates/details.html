@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ job.title }} Detajet {% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-0 rounded-4 overflow-hidden shadow-lg border">
+            
+            <div class="col-lg-6 bg-light d-flex align-items-center justify-content-center p-5" style="height: 500px;">
+                <div class="text-center">
+                    {% if job.company_logo %}
+                        <img src="{{ job.company_logo.url }}" class="img-fluid" style="max-height: 200px; object-fit: contain;" alt="{{ job.company }}">
+                    {% else %}
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 120px; height: 120px;">
+                            <i class="fas fa-briefcase fa-4x"></i>
+                        </div>
+                    {% endif %}
+                    <h2 class="fw-bold text-dark mt-3">{{ job.company }}</h2>
+                    <p class="text-muted text-uppercase mb-0" style="letter-spacing: 1px;">Punëdhënës i Verifikuar</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 bg-white d-flex flex-column" style="height: 500px;">
+                
+                <div class="p-5 flex-grow-1" style="overflow-y: auto; scrollbar-width: thin;">
+                    <h6 class="text-primary fw-bold text-uppercase mb-2" style="letter-spacing: 2px;">Detajet e Pozicionit</h6>
+                    <h1 class="fw-bold mb-4" style="color: #333; font-size: 2rem;">{{ job.title }}</h1>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="p-3 bg-light rounded-3 border-start border-primary border-4">
+                                <small class="text-muted d-block small">PAGESA</small>
+                                <span class="fw-bold text-dark">{{ job.salary }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 bg-light rounded-3 border-start border-warning border-4">
+                                <small class="text-muted d-block small">KUSHTET</small>
+                                <span class="fw-bold text-dark">{{ job.conditions }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job-description text-muted">
+                        <h5 class="text-dark fw-bold mb-3">Përshkrimi i Pozicionit:</h5>
+                        <p style="white-space: pre-line;">{{ job.description }}</p>
+                        
+                        {% if job.requirements %}
+                        <h5 class="text-dark fw-bold mt-4 mb-3">Kërkesat:</h5>
+                        <p style="white-space: pre-line;">{{ job.requirements }}</p>
+                        {% endif %}
+
+                        <a href="{{ job.location_link }}" target="_blank" class="text-decoration-none">
+                            <div class="mt-4 p-3 rounded-3 bg-light border">
+                                <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                                <span class="fw-bold text-dark">Lokacioni:</span>
+                                <span class="ms-1 text-muted">{{ job.location }}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white border-top text-center mt-auto">
+                    <div class="d-grid">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'aplikimPage' job.pk %}" class="btn btn-primary btn-lg py-3 fw-bold rounded-pill shadow-sm">
+                                Apliko Tani <i class="fas fa-paper-plane ms-2"></i>
+                            </a>
+                        {% else %}
+                            <div class="alert alert-warning mb-3 py-2 small shadow-sm">
+                                <i class="fas fa-info-circle me-1"></i> 
+                                Duhet të jeni i loguar për të aplikuar. 
+                                <a href="{% url 'loginPage' %}?next={{ request.path }}" class="fw-bold">Login këtu</a>
+                            </div>
+                            <button class="btn btn-secondary btn-lg py-3 fw-bold rounded-pill opacity-50 shadow-sm" disabled>
+                                Apliko Tani <i class="fas fa-lock ms-2"></i>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

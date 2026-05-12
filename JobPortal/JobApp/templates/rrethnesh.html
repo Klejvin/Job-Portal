@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Rreth Nesh - JobPortal {% endblock %}
+
+{% block content %}
+<section class="py-5 bg-primary text-white mb-5 shadow-sm">
+    <div class="container text-center py-4">
+        <h1 class="display-4 fw-bold mb-3">Më shumë se thjesht një portal pune</h1>
+        <p class="lead mx-auto about-hero">
+            Ne jemi ura lidhëse mes pasionit dhe profesionit. Misioni ynë është të transformojmë mënyrën se si shqiptarët gjejnë karrierën e tyre.
+        </p>
+    </div>
+</section>
+
+<section class="py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="pe-lg-5 text-center text-lg-start">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 history-subtitle">Historia Jonë</h6>
+                    <h2 class="fw-bold mb-4 history-title">Si nisi rrugëtimi i JobPortal?</h2>
+                    <p class="text-muted fs-5 mb-4">
+                        Gjithçka nisi me një pyetje të thjeshtë: "Pse kërkimi i punës duhet të jetë kaq i ndërlikuar?" 
+                    </p>
+                    <p class="text-muted mb-4">
+                        Në vitin 2026, ne krijuam këtë platformë për të ofruar një zgjidhje të shpejtë, transparente dhe mbi të gjitha, falas për të gjithë kandidatët.
+                    </p>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="p-3 bg-light stat-box">
+                                <h4 class="fw-bold mb-0 text-dark">500+</h4>
+                                <small class="text-muted">Kompani Aktive</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 bg-light stat-box">
+                                <h4 class="fw-bold mb-0 text-dark">10k+</h4>
+                                <small class="text-muted">Aplikime Mujore</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="{% static 'images/rrethnesh.png' %}" class="img-fluid rounded-4 shadow-lg" alt="Ekipi ynë">
+                    <div class="position-absolute badge-overlay p-4 rounded-4 d-none d-md-block shadow">
+                        <h5 class="fw-bold mb-1">100% Shqip</h5>
+                        <p class="small mb-0 text-muted">Mbështetje lokale për çdo biznes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Pse na besojnë ne?</h2>
+            <hr class="bg-primary title-divider">
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center about-card">
+                    <div class="icon-circle mb-4 mx-auto bg-soft-primary">
+                        <i class="fas fa-rocket text-primary fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Inovacioni</h5>
+                    <p class="text-muted">Përdorim teknologjinë më të fundit për të gjetur punën që ju përshtatet në sekonda.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center about-card">
+                    <div class="icon-circle mb-4 mx-auto bg-soft-success">
+                        <i class="fas fa-handshake text-success fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Besueshmëria</h5>
+                    <p class="text-muted">Çdo njoftim pune kontrollohet manualisht për të shmangur mashtrimet ose spam-et.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center about-card">
+                    <div class="icon-circle mb-4 mx-auto bg-soft-warning">
+                        <i class="fas fa-users text-warning fa-2x"></i>
+                    </div>
+                    <h5 class="fw-bold">Komuniteti</h5>
+                    <p class="text-muted">Ne nuk jemi thjesht një faqe, ne jemi një komunitet që ndihmon njëri-tjetrin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

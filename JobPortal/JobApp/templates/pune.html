@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Pune {% endblock %}
+
+{% block content %}
+<section class="home-jobs-grid py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center fw-bold mb-5">Vende të lira pune</h2>
+        
+        <!-- FILTRI I RREGULLUAR -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10">
+                <form method="GET" action="" class="row g-2 shadow-sm rounded-pill overflow-hidden bg-white p-2 align-items-center">
+                    
+                    <!-- Filtri i Qytetit -->
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-0 pe-0">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                            </span>
+                            <select name="qyteti" class="form-select border-0 shadow-none px-3" aria-label="Filtro sipas qytetit">
+                                <option value="">Të gjitha qytetet</option>
+                                {% for city_val, city_name in city_choices %}
+                                    <option value="{{ city_val }}" {% if request.GET.qyteti == city_val %}selected{% endif %}>
+                                        {{ city_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filtri i Kategorisë -->
+                    <div class="col-md-4 border-start-md">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-0 pe-0">
+                                <i class="fas fa-briefcase text-primary"></i>
+                            </span>
+                            <select name="kategoria" class="form-select border-0 shadow-none px-3" aria-label="Filtro sipas kategorisë">
+                                <option value="">Të gjitha fushat</option>
+                                {% for cat_val, cat_name in category_choices %}
+                                    <option value="{{ cat_val }}" {% if request.GET.kategoria == cat_val %}selected{% endif %}>
+                                        {{ cat_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Butonat e Veprimit -->
+                    <div class="col-md-4 d-flex justify-content-end pe-2">
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">
+                            <i class="fas fa-search me-2"></i> Kërko
+                        </button>
+                        {% if request.GET.qyteti or request.GET.kategoria %}
+                            <a href="?" class="btn btn-outline-secondary rounded-pill ms-2" title="Pastro filtrat">
+                                <i class="fas fa-redo"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- GRID-I I PUNEVE (PA NDRYSHUAR CSS-in TËND) -->
+        <div class="row g-4">
+            {% for job in jobs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="modern-job-card">
+                        <div class="card-header-flex">
+                            <div class="company-logo-circle">
+                                <div class="portal-logo-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                            </div>
+                            <span class="salary-pill">{{ job.salary }}</span>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="job-title-link">
+                                <a href="{% url 'detailsPage' job.pk %}">{{ job.title }}</a>
+                            </h5>
+                            <p class="company-subname text-muted">{{ job.company }}</p>
+                            
+                            <div class="job-tags">
+                                <span class="tag-item">
+                                    <i class="fas fa-map-marker-alt"></i> {{ job.location }}
+                                </span>
+                                <span class="tag-item">
+                                    <i class="fas fa-tag"></i> {{ job.get_category_display }}
+                                </span>
+                                <span class="tag-item">
+                                    <i class="far fa-clock"></i> {{ job.conditions }}
+                                </span>
+                            </div>
+                            
+                            <p class="job-excerpt">
+                                {{ job.description|truncatechars:90 }}
+                            </p>
+                        </div>
+
+                        <div class="card-action">
+                            <a href="{% url 'detailsPage' job.pk %}" class="btn-view-job text-decoration-none">
+                                Apliko Tani <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <div class="p-5 bg-white rounded-4 shadow-sm">
+                        <i class="fas fa-search-minus fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Nuk u gjet asnjë rezultat</h4>
+                        <p>Provoni të ndryshoni filtrat e kërkimit.</p>
+                        <a href="?" class="btn btn-primary rounded-pill px-4">Shiko të gjitha</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Stilim shtesë vetëm për rreshtimin e filtrit në Mobile -->
+<style>
+    @media (min-width: 768px) {
+        .border-start-md { border-left: 1px solid #eee !important; }
+    }
+    @media (max-width: 767px) {
+        form.rounded-pill { border-radius: 1.5rem !important; }
+        .border-start-md { border-top: 1px solid #eee !important; margin-top: 10px; padding-top: 10px; }
+    }
+</style>
+{% endblock %}
